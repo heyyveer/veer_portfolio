@@ -4,6 +4,7 @@ export type SkillGroup =
   | "Deep Learning"
   | "Programming"
   | "Data"
+  | "Frameworks"
   | "Tools";
 
 export type Skill = {
