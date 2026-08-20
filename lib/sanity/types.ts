@@ -19,7 +19,11 @@ export type ProjectListItem = {
   status: "live" | "shipped" | "wip" | "archived";
   liveUrl?: string;
   featured: boolean;
-  stack: Array<{ _id: string; name: string; group: string }>;
+  stack: Array<{
+    _id: string;
+    name: string;
+    group: string;
+  }>;
 };
 
 export type ProjectDetail = ProjectListItem & {
@@ -46,6 +50,7 @@ export type SkillItem = {
     | "Generative AI"
     | "Deep Learning"
     | "Programming"
+    | "Frameworks"
     | "Data"
     | "Tools";
   proficiency: number | null;
@@ -62,5 +67,9 @@ export type SiteSettings = {
   availability: boolean;
   email: string;
   phone: string;
-  socials: Array<{ label: string; handle: string; href: string }>;
+  socials: Array<{
+    label: string;
+    handle: string;
+    href: string;
+  }>;
 };
