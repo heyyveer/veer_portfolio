@@ -17,7 +17,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     bioLong: identity.bioLong,
     location: identity.location,
     timezone: identity.timezone,
-    availability: identity.status === "Available for work",
+    availability: identity.status === "Open to opportunities",
     email: contact.email,
     phone: contact.phone,
     socials: socials.map((s) => ({ label: s.label, handle: s.handle, href: s.href })),
