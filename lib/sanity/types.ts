@@ -41,7 +41,13 @@ export type ExperienceItem = {
 export type SkillItem = {
   _id: string;
   name: string;
-  group: "Frontend" | "Backend" | "Database" | "Tooling";
+  group:
+    | "AI / ML"
+    | "Generative AI"
+    | "Deep Learning"
+    | "Programming"
+    | "Data"
+    | "Tools";
   proficiency: number | null;
 };
 
