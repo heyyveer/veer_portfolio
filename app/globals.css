@@ -1,0 +1,462 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================================
+   V3 TOKEN LAYER — Ink scale + single Signal accent, authored in OKLCH.
+   Source of truth: DESIGN.md §3. Dark is the default experience; light is
+   the editorial alternate. No persona overrides. No hardcoded hex in TSX —
+   components consume semantic Tailwind utilities (bg-background, text-accent).
+   ============================================================================ */
+
+@layer base {
+  :root {
+    /* --- Light theme (editorial alternate) --- */
+    --background: oklch(0.985 0.002 95);   /* paper */
+    --foreground: oklch(0.16 0.006 265);   /* ink-950 */
+
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.16 0.006 265);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.16 0.006 265);
+
+    /* Primary is theme-inverted (premium, timeless) */
+    --primary: oklch(0.16 0.006 265);          /* ink-950 */
+    --primary-foreground: oklch(0.97 0.003 265);
+
+    --secondary: oklch(0.92 0.005 265);        /* ink-100 */
+    --secondary-foreground: oklch(0.16 0.006 265);
+
+    --muted: oklch(0.92 0.005 265);            /* ink-100 */
+    --muted-foreground: oklch(0.55 0.012 265); /* ink-500 */
+
+    /* Signal accent — single brand color */
+    --accent: oklch(0.54 0.20 258);            /* signal-600 (light) */
+    --accent-foreground: oklch(1 0 0);
+    --accent-glow: oklch(0.62 0.21 258 / 0.14);
+
+    --border: oklch(0.86 0.008 265);           /* ink-200 */
+    --input: oklch(0.86 0.008 265);
+    --ring: oklch(0.62 0.21 258);              /* signal-500 */
+
+    /* Status + data palette (charts/status only) */
+    --success: oklch(0.74 0.14 168);           /* mint */
+    --warning: oklch(0.78 0.15 75);            /* amber */
+    --destructive: oklch(0.64 0.20 12);        /* rose */
+    --destructive-foreground: oklch(0.985 0.002 95);
+
+    --chart-1: oklch(0.62 0.21 258);           /* signal */
+    --chart-2: oklch(0.62 0.20 285);           /* flux */
+    --chart-3: oklch(0.74 0.14 168);           /* mint */
+    --chart-4: oklch(0.78 0.15 75);            /* amber */
+    --chart-5: oklch(0.66 0.013 265);          /* ink-400 */
+
+    --radius: 0.75rem;
+
+    /* Elevation — theme-aware (light). DESIGN.md §7.4 */
+    --elevation-xs: 0 1px 2px oklch(0 0 0 / 0.04);
+    --elevation-sm: 0 2px 8px oklch(0 0 0 / 0.06);
+    --elevation-lg: 0 12px 32px -8px oklch(0 0 0 / 0.12);
+  }
+
+  .dark {
+    /* --- Dark theme (default, cinematic) --- */
+    --background: oklch(0.16 0.006 265);       /* ink-950 */
+    --foreground: oklch(0.97 0.003 265);       /* ink-50 */
+
+    --card: oklch(0.20 0.007 265);             /* ink-900 */
+    --card-foreground: oklch(0.97 0.003 265);
+    --popover: oklch(0.20 0.007 265);
+    --popover-foreground: oklch(0.97 0.003 265);
+
+    --primary: oklch(0.97 0.003 265);          /* ink-50 */
+    --primary-foreground: oklch(0.16 0.006 265);
+
+    --secondary: oklch(0.25 0.008 265);        /* ink-800 */
+    --secondary-foreground: oklch(0.97 0.003 265);
+
+    --muted: oklch(0.25 0.008 265);            /* ink-800 */
+    --muted-foreground: oklch(0.66 0.013 265); /* ink-400 */
+
+    --accent: oklch(0.70 0.17 258);            /* signal-400 (dark) */
+    --accent-foreground: oklch(0.16 0.006 265);
+    --accent-glow: oklch(0.62 0.21 258 / 0.18);
+
+    --border: oklch(0.32 0.009 265);           /* ink-700 */
+    --input: oklch(0.32 0.009 265);
+    --ring: oklch(0.62 0.21 258);
+
+    --success: oklch(0.74 0.14 168);
+    --warning: oklch(0.78 0.15 75);
+    --destructive: oklch(0.64 0.20 12);
+    --destructive-foreground: oklch(0.97 0.003 265);
+
+    --chart-1: oklch(0.70 0.17 258);
+    --chart-2: oklch(0.62 0.20 285);
+    --chart-3: oklch(0.74 0.14 168);
+    --chart-4: oklch(0.78 0.15 75);
+    --chart-5: oklch(0.66 0.013 265);
+
+    /* Elevation — theme-aware (dark relies more on tint, deeper shadow) */
+    --elevation-xs: 0 1px 2px oklch(0 0 0 / 0.3);
+    --elevation-sm: 0 2px 10px oklch(0 0 0 / 0.4);
+    --elevation-lg: 0 16px 40px -10px oklch(0 0 0 / 0.5);
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Tailwind v4 token mapping. Values are full OKLCH colors, so they are mapped
+   directly (no hsl() wrapper). This is what changed from the legacy HSL setup.
+   ---------------------------------------------------------------------------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Radius scale — DESIGN.md §7.3 */
+  --radius-sm: calc(var(--radius) - 0.25rem); /* 0.5rem  */
+  --radius-md: calc(var(--radius) - 0.125rem);/* 0.625rem */
+  --radius-lg: var(--radius);                 /* 0.75rem */
+  --radius-xl: calc(var(--radius) + 0.25rem); /* 1rem    */
+  --radius-2xl: calc(var(--radius) + 0.75rem);/* 1.5rem  */
+
+  /* Type families — DESIGN.md §4. Clash Display is the primary face for both
+     display and body; the prior families remain as graceful fallbacks. */
+  --font-display: var(--font-clash);          /* Clash Display */
+  --font-sans: var(--font-clash);             /* Clash Display (body/UI) */
+  --font-script: var(--font-telma);           /* Telma (script accent) */
+  --font-serif: var(--font-instrument);       /* Instrument Serif (editorial) */
+  --font-mono: var(--font-geist-mono);        /* Geist Mono */
+
+  /* Spacing base — 4px scale (DESIGN.md §5). Tailwind multiples derive from this. */
+  --spacing: 0.25rem;
+
+  /* Elevation utilities (theme-aware) + single accent glow */
+  --shadow-xs: var(--elevation-xs);
+  --shadow-sm: var(--elevation-sm);
+  --shadow-lg: var(--elevation-lg);
+  --shadow-glow: 0 0 0 1px var(--accent), 0 8px 40px var(--accent-glow);
+
+  /* Fluid type scale — DESIGN.md §4.3. Each token pairs line-height + tracking. */
+  --text-display-xl: clamp(2.5rem, 8vw, 7.5rem);
+  --text-display-xl--line-height: 0.92;
+  --text-display-xl--letter-spacing: -0.035em;
+
+  --text-display-l: clamp(2.75rem, 6vw, 5.5rem);
+  --text-display-l--line-height: 0.95;
+  --text-display-l--letter-spacing: -0.03em;
+
+  --text-editorial: clamp(2rem, 4vw, 3.5rem);
+  --text-editorial--line-height: 1.05;
+  --text-editorial--letter-spacing: -0.01em;
+
+  --text-h1: clamp(2.25rem, 4vw, 3.5rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.025em;
+
+  --text-h2: clamp(1.75rem, 3vw, 2.5rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-h3: clamp(1.375rem, 2vw, 1.75rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.015em;
+
+  --text-h4: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: -0.01em;
+
+  --text-body-lg: clamp(1.125rem, 1.2vw, 1.25rem);
+  --text-body-lg--line-height: 1.6;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    /* Base canvas color. The fixed SiteBackground (Liquid Ether) paints over
+       this and behind all content, so body itself stays transparent. */
+    background-color: var(--background);
+  }
+
+  body {
+    background-color: transparent;
+    color: var(--foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    overflow-x: clip;
+  }
+
+  /* Lenis smooth-scroll compatibility */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklch, var(--accent) 25%, transparent);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Foundational utilities. Section/component styling arrives in later phases;
+   these are the cross-cutting primitives only.
+   ---------------------------------------------------------------------------- */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  }
+  .font-serif-editorial {
+    font-family: var(--font-serif), ui-serif, Georgia, serif;
+  }
+  .font-script {
+    font-family: var(--font-script), ui-sans-serif, cursive;
+  }
+
+  /* Top-of-page scroll progress bar — accent gradient with a soft glow. */
+  .scroll-progress-bar {
+    background-image: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--accent) 60%, var(--foreground)),
+      var(--accent)
+    );
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+  .font-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  /* Hairline details */
+  .hairline-t { box-shadow: inset 0 1px 0 0 var(--border); }
+  .hairline-b { box-shadow: inset 0 -1px 0 0 var(--border); }
+
+  /* Glass surface — reserved for nav + assistant launcher (DESIGN.md §7.6) */
+  .glass {
+    background-color: color-mix(in oklch, var(--background) 72%, transparent);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border-color: color-mix(in oklch, var(--border) 60%, transparent);
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .glass { background-color: var(--background); }
+  }
+
+  /* Architectural blueprint grid — drafting-paper backdrop for the Identity
+     Core hero. Major + minor rules, both derived from --border so it tracks
+     the theme. Always pair with a radial/linear mask so edges fade and it
+     never competes with content. */
+  .blueprint-grid {
+    --bp-major: color-mix(in oklch, var(--border) 85%, transparent);
+    --bp-minor: color-mix(in oklch, var(--border) 38%, transparent);
+    background-image:
+      linear-gradient(to right, var(--bp-major) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--bp-major) 1px, transparent 1px),
+      linear-gradient(to right, var(--bp-minor) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--bp-minor) 1px, transparent 1px);
+    background-size:
+      120px 120px,
+      120px 120px,
+      24px 24px,
+      24px 24px;
+    background-position: -1px -1px;
+  }
+
+  /* SR brand monogram as an alpha mask, so the glyph paints in the current
+     ink color (theme-aware) instead of shipping a fixed black raster that
+     vanishes in dark mode. Pair with a bg-* utility for the fill. */
+  .brand-mark-sr {
+    -webkit-mask: url("/sr-monogram.png") center / contain no-repeat;
+    mask: url("/sr-monogram.png") center / contain no-repeat;
+  }
+
+  /* Single per-viewport accent glow (DESIGN.md §7.4) */
+  .signal-glow {
+    background-image: radial-gradient(
+      60% 50% at 50% 0%,
+      var(--accent-glow),
+      transparent 70%
+    );
+  }
+
+  /* Animated gradient text (ReactBits "Gradient Text" style). Token-driven
+     stops so it tracks the theme; the reduced-motion backstop freezes the pan. */
+  .gradient-text {
+    background-image: linear-gradient(
+      90deg,
+      var(--accent),
+      color-mix(in oklch, var(--accent) 50%, var(--foreground)),
+      var(--accent)
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-text-pan 6s linear infinite;
+  }
+
+  /* Cyber neon treatment — pair with .gradient-text. Accent glow scales with
+     font-size (em units) plus a slow flicker. Reduced-motion freezes the
+     flicker via the global backstop. */
+  .cyber-text {
+    filter:
+      drop-shadow(0 0 0.04em color-mix(in oklch, var(--accent) 75%, transparent))
+      drop-shadow(0 0 0.16em color-mix(in oklch, var(--accent) 45%, transparent));
+    animation: cyber-flicker 4.5s steps(1) infinite;
+  }
+
+  /* Hollow / outlined display text — pairs with a filled line for contrast. */
+  .stroke-text {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px color-mix(in oklch, var(--foreground) 50%, transparent);
+  }
+
+  /* Flowing neon text — a multi-stop accent gradient pans across the fill for a
+     liquid shimmer. Pan-only (background-position) so it stays cheap; the glow
+     is a static drop-shadow (no per-frame filter animation → no flicker). */
+  .flow-cycle-text {
+    background-image: linear-gradient(
+      100deg,
+      var(--accent),
+      color-mix(in oklch, var(--accent) 55%, var(--background)),
+      color-mix(in oklch, var(--accent) 55%, var(--foreground)),
+      var(--accent)
+    );
+    background-size: 220% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(
+      0 0 0.12em color-mix(in oklch, var(--accent) 45%, transparent)
+    );
+    animation: gradient-text-pan 7s linear infinite;
+  }
+
+  /* Skip-to-content link */
+  .skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    z-index: 100;
+    transform: translateY(-150%);
+    border-radius: var(--radius-md);
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+    transition: transform 150ms ease;
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-text-pan {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes cyber-flicker {
+  0%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.78;
+  }
+  94% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.86;
+  }
+  97% {
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Reduced-motion backstop — ANIMATION_SYSTEM.md §20.1. Per-component branches
+   still apply; this is the global guard.
+   ---------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
