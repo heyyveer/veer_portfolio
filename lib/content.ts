@@ -1,4 +1,10 @@
-export type SkillGroup = "AI / ML" | "Programming" | "Frameworks" | "Tools";
+export type SkillGroup =
+  | "AI / ML"
+  | "Generative AI"
+  | "Deep Learning"
+  | "Programming"
+  | "Data"
+  | "Tools";
 
 export type Skill = {
   name: string;
