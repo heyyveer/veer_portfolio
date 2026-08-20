@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
 import { Instrument_Serif } from "next/font/google";
 import localFont from "next/font/local";
+
 import { ThemeProvider, ScrollProvider } from "@/providers";
 import { PageContainer, SiteFooter } from "@/components/layout";
 import { SiteHeader } from "@/components/navigation";
 import { ScrollProgress } from "@/components/motion";
 import { SiteBackground } from "@/components/site-background";
 import { JsonLd } from "@/components/json-ld";
+import { IntroLoader } from "@/components/intro-loader";
+
 import { SITE_URL } from "@/constants";
 import { cn } from "@/lib/utils";
+
 import "lenis/dist/lenis.css";
 import "./globals.css";
 
@@ -129,6 +133,9 @@ export default function RootLayout({
         className="flex min-h-dvh flex-col"
         suppressHydrationWarning
       >
+        {/* Initial loading screen */}
+        <IntroLoader />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
