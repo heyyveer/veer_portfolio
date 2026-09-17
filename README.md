@@ -1,9 +1,9 @@
-# Soumyaranjan Rout — Portfolio
+# Veer Tiwari — Portfolio
 
 A content-driven personal portfolio built as a single-page scroll narrative, with a
 Sanity-backed content layer and an AI assistant surface for project Q&A.
 
-**Live:** https://soumyaranjan07.vercel.app
+**Live:** [Portfolio](https://veer-portfolio-nu.vercel.app/)
 
 ---
 
@@ -98,8 +98,8 @@ Requires Node.js `>=20` (developed on `v24`). The repo ships a
 `package-lock.json`, so use npm.
 
 ```bash
-git clone git@github.com:Soumya7681/soumya_portfolio.git
-cd soumya_portfolio
+git clone 
+cd Portfolio
 npm install
 cp .env.example .env.local   # optional — the site runs without keys
 npm run dev
@@ -231,7 +231,7 @@ Sanity configured?  ──yes──▶  lib/data/*  ──▶  GROQ via next-san
 ```
 
 `lib/content.ts` mirrors the live portfolio at
-https://soumyaranjan07.vercel.app and is the seed payload for populating Sanity.
+[Portfolio](https://veer-portfolio-nu.vercel.app/) and is the seed payload for populating Sanity.
 Treat the live site as the source of truth for content: never invent
 biographical facts, project descriptions, dates, or contact details.
 
@@ -291,7 +291,7 @@ served — the assistant and the Sanity webhook only work under a runtime
 change required to ship both on the same origin.
 
 The production site currently runs on Vercel at
-https://soumyaranjan07.vercel.app.
+[Portfolio](https://veer-portfolio-nu.vercel.app/)
 
 ---
 
